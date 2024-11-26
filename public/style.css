@@ -6,48 +6,58 @@
 }
 
 :root {
-    --primary-color: #1a237e;
-    --secondary-color: #7c4dff;
-    --accent-color: #ff4081;
-    --gradient-start: #9c27b0;
-    --gradient-end: #e91e63;
-    --background-light: rgba(255, 255, 255, 0.98);
-    --text-primary: #1a237e;
-    --text-secondary: #455a64;
-    --card-bg: #ffffff;
-    --hover-color: #651fff;
-    --shadow: 0 8px 30px rgba(124, 77, 255, 0.12);
-    --input-border: #e0e0e0;
+    --primary-color: #521C14;
+    --secondary-color: #7E513B;
+    --accent-color: #B08470;
+    --gradient-start: #521C14;
+    --gradient-end: #7E513B;
+    --background-light: #DFD4CF;
+    --text-primary: #521C14;
+    --text-secondary: #7E513B;
+    --card-bg: #DFD4CF;
+    --hover-color: #B08470;
+    --shadow: 0 8px 30px rgba(126, 81, 59, 0.12);
+    --input-border: #B08470;
     --border-radius: 12px;
-    --bg-gradient-1: #4158D0;
-    --bg-gradient-2: #C850C0;
-    --bg-gradient-3: #FFCC70;
+    --bg-gradient-1: #521C14;
+    --bg-gradient-2: #7E513B;
+    --bg-gradient-3: #DFD4CF;
     --border-gradient: linear-gradient(135deg, var(--bg-gradient-1), var(--bg-gradient-2));
-    --border-glow: 0 0 15px rgba(124, 77, 255, 0.2);
+    --border-glow: 0 0 15px rgba(126, 81, 59, 0.2);
     
     /* Synonym colors - from strongest to weakest */
-    --syn-color-1: #7c4dff;
-    --syn-color-2: #8559ff;
-    --syn-color-3: #8e66ff;
-    --syn-color-4: #9773ff;
-    --syn-color-5: #a080ff;
-    --syn-color-6: #a98dff;
-    --syn-color-7: #b29aff;
-    --syn-color-8: #bba7ff;
-    --syn-color-9: #c4b4ff;
-    --syn-color-10: #cdc1ff;
+    --syn-color-1: #521C14;
+    --syn-color-2: #5d261e;
+    --syn-color-3: #683028;
+    --syn-color-4: #733a32;
+    --syn-color-5: #7e443c;
+    --syn-color-6: #894e46;
+    --syn-color-7: #945850;
+    --syn-color-8: #9f625a;
+    --syn-color-9: #aa6c64;
+    --syn-color-10: #b5766e;
     
     /* Antonym colors - from strongest to weakest */
-    --ant-color-1: #ff4081;
-    --ant-color-2: #ff4d8a;
-    --ant-color-3: #ff5a93;
-    --ant-color-4: #ff669c;
-    --ant-color-5: #ff73a5;
-    --ant-color-6: #ff80ae;
-    --ant-color-7: #ff8db7;
-    --ant-color-8: #ff99c0;
-    --ant-color-9: #ffa6c9;
-    --ant-color-10: #ffb3d2;
+    --ant-color-1: #B08470;
+    --ant-color-2: #b78d7a;
+    --ant-color-3: #be9684;
+    --ant-color-4: #c59f8e;
+    --ant-color-5: #cca898;
+    --ant-color-6: #d3b1a2;
+    --ant-color-7: #dabaac;
+    --ant-color-8: #e1c3b6;
+    --ant-color-9: #e8ccc0;
+    --ant-color-10: #efd5ca;
+    
+    /* Tag and meter colors */
+    --tag-formal: #521C14;
+    --tag-informal: #7E513B;
+    --tag-tone-1: #521C14;
+    --tag-tone-2: #7E513B;
+    --tag-tone-3: #B08470;
+    --meter-high: #521C14;
+    --meter-medium: #7E513B;
+    --meter-low: #B08470;
 }
 
 body {
@@ -105,10 +115,7 @@ body::before {
 
 h1 {
     font-family: 'Playfair Display', serif;
-    background: linear-gradient(135deg, #009688, #00bcd4);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    color: white;
     font-size: 3.5rem;
     margin-bottom: 2rem;
     letter-spacing: -0.5px;
@@ -155,7 +162,7 @@ button {
 button:hover {
     background: linear-gradient(135deg, var(--hover-color), var(--gradient-start));
     transform: translateY(-2px);
-    box-shadow: 0 4px 15px rgba(124, 77, 255, 0.2);
+    box-shadow: 0 4px 15px rgba(124, 131, 99, 0.2);
 }
 
 .column {
@@ -170,7 +177,7 @@ button:hover {
 
 .column:hover {
     transform: translateY(-2px);
-    box-shadow: 0 12px 40px rgba(124, 77, 255, 0.15);
+    box-shadow: 0 12px 40px rgba(124, 131, 99, 0.15);
 }
 
 .column h2 {
@@ -314,38 +321,87 @@ button:hover {
     100% { opacity: 1; }
 }
 
-/* Tags Styling */
-.tag {
+/* Tags styling */
+.tags-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 1rem;
+}
+
+.tone-tag, .formality-tag {
     display: inline-block;
-    padding: 4px 8px;
-    border-radius: 12px;
-    font-size: 0.8em;
-    margin: 2px;
-    color: white;
+    padding: 0.4rem 0.8rem;
+    border-radius: var(--border-radius);
+    color: #DFD4CF;
+    font-size: 0.9rem;
+    font-weight: 500;
+    margin: 0.2rem;
+    border: 1px solid rgba(223, 212, 207, 0.2);
 }
 
-.formality-tag {
-    background: linear-gradient(135deg, #6366f1, #4f46e5);
+.formality-formal {
+    background-color: var(--tag-formal);
 }
 
-.tone-tag {
-    background: linear-gradient(135deg, #ec4899, #d946ef);
+.formality-informal {
+    background-color: var(--tag-informal);
 }
 
-/* Similarity Meter */
-.similarity-meter {
+.tone-1 {
+    background-color: var(--tag-tone-1);
+}
+
+.tone-2 {
+    background-color: var(--tag-tone-2);
+}
+
+.tone-3 {
+    background-color: var(--tag-tone-3);
+}
+
+/* Meter styling */
+.meter {
     width: 100%;
-    height: 6px;
-    background: #e5e7eb;
-    border-radius: 3px;
-    margin: 8px 0;
+    height: 8px;
+    border-radius: 4px;
+    margin: 0.5rem 0;
+    background-color: rgba(223, 212, 207, 0.2);
     overflow: hidden;
 }
 
-.similarity-fill {
+.meter-fill {
     height: 100%;
-    background: linear-gradient(90deg, #3b82f6, #60a5fa);
+    border-radius: 4px;
     transition: width 0.3s ease;
+}
+
+.meter-high .meter-fill {
+    background-color: var(--meter-high);
+}
+
+.meter-medium .meter-fill {
+    background-color: var(--meter-medium);
+}
+
+.meter-low .meter-fill {
+    background-color: var(--meter-low);
+}
+
+.similarity-score {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    background: linear-gradient(135deg, var(--tag-tone-1), var(--tag-tone-2));
+    color: #DFD4CF;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    margin-top: 0.5rem;
+    font-weight: 500;
+}
+
+/* Remove old classes */
+.similarity-meter, .similarity-fill, .tag {
+    display: none;
 }
 
 /* Idioms Section */
@@ -377,14 +433,14 @@ button:hover {
     background: var(--card-bg);
     padding: 1.5rem;
     border-radius: var(--border-radius);
-    box-shadow: 0 2px 8px rgba(124, 77, 255, 0.05);
+    box-shadow: 0 2px 8px rgba(124, 131, 99, 0.05);
     transition: all 0.3s ease;
-    border: 1px solid rgba(124, 77, 255, 0.1);
+    border: 1px solid rgba(124, 131, 99, 0.1);
 }
 
 .idiom-card:hover {
     transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(124, 77, 255, 0.12);
+    box-shadow: 0 8px 20px rgba(124, 131, 99, 0.12);
 }
 
 .idiom-card p {
@@ -396,7 +452,7 @@ button:hover {
 
 .word-card {
     background: rgba(255, 255, 255, 0.9);
-    border: 2px solid rgba(124, 77, 255, 0.15);
+    border: 2px solid rgba(124, 131, 99, 0.15);
     border-radius: calc(var(--border-radius) - 4px);
     padding: 1rem;
     margin: 0.5rem 0;
@@ -430,29 +486,18 @@ button:hover {
 .word-card:hover {
     background: rgba(255, 255, 255, 0.95);
     transform: translateX(5px);
-    box-shadow: 0 0 10px rgba(124, 77, 255, 0.1);
+    box-shadow: 0 0 10px rgba(124, 131, 99, 0.1);
 }
 
 /* Add subtle top and bottom borders */
 #synonymList .word-card {
-    border-top: 1px solid rgba(124, 77, 255, 0.1);
-    border-bottom: 1px solid rgba(124, 77, 255, 0.1);
+    border-top: 1px solid rgba(124, 131, 99, 0.1);
+    border-bottom: 1px solid rgba(124, 131, 99, 0.1);
 }
 
 #antonymList .word-card {
     border-top: 1px solid rgba(255, 64, 129, 0.1);
     border-bottom: 1px solid rgba(255, 64, 129, 0.1);
-}
-
-.similarity-score {
-    display: inline-block;
-    padding: 0.25rem 0.75rem;
-    background: linear-gradient(135deg, rgba(124, 77, 255, 0.1), rgba(68, 138, 255, 0.1));
-    color: var(--secondary-color);
-    border-radius: 20px;
-    font-size: 0.9rem;
-    margin-top: 0.5rem;
-    font-weight: 500;
 }
 
 .loading-spinner {
@@ -464,7 +509,7 @@ button:hover {
     width: 40px;
     height: 40px;
     margin: 0 auto;
-    border: 4px solid rgba(124, 77, 255, 0.1);
+    border: 4px solid rgba(124, 131, 99, 0.1);
     border-top: 4px solid var(--secondary-color);
     border-radius: 50%;
     animation: spin 1s linear infinite;
@@ -543,12 +588,12 @@ button:hover {
     padding: 1.5rem;
     margin: 1rem 0;
     box-shadow: var(--shadow);
-    border: 1px solid rgba(124, 77, 255, 0.2);
+    border: 1px solid rgba(124, 131, 99, 0.2);
     transition: all 0.3s ease;
 }
 
 .synonyms-container:hover, .antonyms-container:hover {
-    border-color: rgba(124, 77, 255, 0.4);
+    border-color: rgba(124, 131, 99, 0.4);
     box-shadow: var(--border-glow);
     transform: translateY(-2px);
 }
@@ -577,7 +622,7 @@ button:hover {
 
 .word-item {
     background: rgba(255, 255, 255, 0.9);
-    border: 2px solid rgba(124, 77, 255, 0.15);
+    border: 2px solid rgba(124, 131, 99, 0.15);
     border-radius: calc(var(--border-radius) - 4px);
     padding: 0.75rem 1rem;
     margin: 0.5rem 0;
@@ -588,7 +633,7 @@ button:hover {
     background: rgba(255, 255, 255, 0.95);
     transform: translateX(5px);
     border-width: 2.5px;
-    box-shadow: 0 0 10px rgba(124, 77, 255, 0.1);
+    box-shadow: 0 0 10px rgba(124, 131, 99, 0.1);
 }
 
 .synonyms-container .word-item {
@@ -604,12 +649,12 @@ button:hover {
     border-radius: var(--border-radius);
     padding: 1.5rem;
     margin: 1rem 0;
-    border: 1px solid rgba(124, 77, 255, 0.2);
+    border: 1px solid rgba(124, 131, 99, 0.2);
     box-shadow: var(--shadow);
     transition: all 0.3s ease;
 }
 
 .phrases-container:hover {
-    border-color: rgba(124, 77, 255, 0.4);
+    border-color: rgba(124, 131, 99, 0.4);
     box-shadow: var(--border-glow);
 }

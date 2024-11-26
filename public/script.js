@@ -41,16 +41,16 @@ function createWordCard(wordData, index, type) {
     card.className = 'word-card';
     
     const similarityMeter = wordData.similarityScore ? `
-        <div class="similarity-meter">
-            <div class="similarity-fill" style="width: ${wordData.similarityScore}%"></div>
+        <div class="meter ${getSimilarityClass(wordData.similarityScore)}">
+            <div class="meter-fill" style="width: ${wordData.similarityScore}%"></div>
         </div>
-        <div class="similarity-text">${wordData.similarityScore}% similar</div>
+        <div class="similarity-score">${wordData.similarityScore}% similar</div>
     ` : '';
 
-    const formalityTag = `<span class="tag formality-tag">${wordData.formalityLevel}</span>`;
+    const formalityTag = `<span class="formality-tag ${getFormalityClass(wordData.formalityLevel)}">${wordData.formalityLevel}</span>`;
     
-    const toneTags = wordData.toneTypes.map(tone => 
-        `<span class="tag tone-tag">${tone}</span>`
+    const toneTags = wordData.toneTypes.map((tone, index) => 
+        `<span class="tone-tag tone-${index + 1}">${tone}</span>`
     ).join('');
 
     card.innerHTML = `
@@ -70,6 +70,16 @@ function createWordCard(wordData, index, type) {
         </div>
     `;
     return card;
+}
+
+function getSimilarityClass(score) {
+    if (score >= 80) return 'meter-high';
+    if (score >= 50) return 'meter-medium';
+    return 'meter-low';
+}
+
+function getFormalityClass(level) {
+    return level.toLowerCase() === 'formal' ? 'formality-formal' : 'formality-informal';
 }
 
 function displayResults(data) {
