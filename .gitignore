@@ -67,10 +67,3 @@ node_modules/
 
 # dataconnect generated files
 .dataconnect
-
-# Added entries
-node_modules/
-.env
-.DS_Store
-npm-debug.log
-.env.local

@@ -78,10 +78,13 @@ function displayResults(data) {
     const originalWordSyn = document.getElementById('originalWordSyn');
     const originalWordAnt = document.getElementById('originalWordAnt');
 
-    if (synonymList) synonymList.innerHTML = '';
-    if (antonymList) antonymList.innerHTML = '';
-    if (originalWordSyn) originalWordSyn.textContent = `Synonyms for "${data.word}"`;
-    if (originalWordAnt) originalWordAnt.textContent = `Antonyms for "${data.word}"`;
+    // Clear previous results
+    synonymList.innerHTML = '';
+    antonymList.innerHTML = '';
+
+    // Set titles
+    originalWordSyn.textContent = 'Synonyms';
+    originalWordAnt.textContent = 'Antonyms';
 
     if (data.synonyms && data.synonyms.length > 0 && synonymList) {
         data.synonyms.forEach((syn, index) => {

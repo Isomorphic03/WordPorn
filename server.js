@@ -3,20 +3,14 @@ const path = require('path');
 const { GoogleGenerativeAI } = require("@google/generative-ai");
 
 const app = express();
-const port = process.env.PORT || 3000;
+const port = 3000;
 
 // Middleware to parse JSON bodies
 app.use(express.json());
 app.use(express.static('public'));
 
 // Initialize Gemini AI
-const API_KEY = process.env.GEMINI_API_KEY;
-if (!API_KEY) {
-    console.error('GEMINI_API_KEY environment variable is not set!');
-    process.exit(1);
-}
-
-const genAI = new GoogleGenerativeAI(API_KEY);
+const genAI = new GoogleGenerativeAI("AIzaSyDOj4J1E5boZF9L3bMK0WOq_DT1RhuEdsY");
 const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
 // Error handling middleware
@@ -90,7 +84,9 @@ Important:
 - Format the response exactly as shown above`;
 
         console.log('Sending request to AI...');
-        const result = await model.generateContent(prompt);
+        const result = await model.generateContent({
+            contents: [{ role: 'user', parts: [{ text: prompt }] }]
+        });
         console.log('Received AI response');
         
         const response = await result.response;
